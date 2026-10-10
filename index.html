@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" data-mode="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="color-scheme" content="dark"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>In Their Shoes — Empathy Maps and User Journeys for Students</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{--bg:#0C0C0C;--line:#2A2A2A;--text:#F2F0EB;--muted:#8a8a8a;--dim:#3a3a3a;--accent:#E8E4D9;--green:#4ADE80;--ol:#666;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+[data-mode=light]{--bg:#F6F4EE;--line:#D8D4C8;--text:#14130F;--muted:#6b675c;--dim:#bdb8a8;--accent:#2b2a24;--green:#15803d;--ol:#8a8678;color-scheme:light}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);background:var(--bg)}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-weight:300;min-height:100vh;-webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px 100px}
+@media(min-width:600px){.wrap{padding:0 40px 100px}}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:.5px solid var(--line);margin-bottom:48px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+@media(min-width:600px){nav{padding:28px 0;margin-bottom:72px}}
+.nav-name{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.nav-links{display:flex;gap:12px}
+@media(min-width:600px){.nav-links{gap:28px}}
+.nav-link{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.04em;color:var(--muted);text-transform:uppercase;cursor:pointer;transition:color .2s;background:none;border:none;padding:6px 0}
+@media(min-width:600px){.nav-link{font-size:11px;letter-spacing:.06em}}
+.nav-link:hover,.nav-link.active{color:var(--text)}
+.nav-link:focus-visible,.work-item:focus-visible{outline:1px solid var(--green);outline-offset:3px}
+.hero{margin-bottom:48px}
+@media(min-width:600px){.hero{margin-bottom:72px}}
+.hero-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-bottom:16px}
+.hero-name{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(44px,12vw,92px);line-height:1.02;margin-bottom:24px;font-weight:400}
+.hero-name em{font-style:italic;color:var(--muted)}
+.hero-bio{font-size:15px;line-height:1.85;color:var(--muted);margin-bottom:24px}
+@media(min-width:600px){.hero-bio{font-size:16px;max-width:580px}}
+.hero-bio strong{color:var(--accent);font-weight:400}
+.hero-status{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:10px;color:var(--green);letter-spacing:.06em;text-transform:uppercase}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@media(prefers-reduced-motion:reduce){.dot{animation:none}}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border:.5px solid var(--line);border-radius:2px;margin-bottom:48px;overflow:hidden}
+.stat{padding:16px 12px;border-right:.5px solid var(--line)}
+@media(min-width:600px){.stat{padding:24px 20px}}
+.stat:last-child{border-right:none}
+.stat-num{font-family:'DM Serif Display',serif;font-size:34px;line-height:1}
+.stat-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.section{display:none}.section.active{display:block}
+.sec-head{display:flex;align-items:center;gap:12px;margin:48px 0 24px}
+.section>.sec-head:first-child{margin-top:0}
+.sec-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:.5px solid var(--line);padding:5px 12px;border-radius:40px;white-space:nowrap}
+.sec-line{flex:1;height:.5px;background:var(--line)}
+p.t{font-size:14px;line-height:1.9;color:var(--muted);margin-bottom:20px}
+@media(min-width:600px){p.t{font-size:15px}}
+p.t strong{color:var(--accent);font-weight:400}
+.pull{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(22px,4.5vw,30px);line-height:1.3;margin:8px 0 28px}
+.pull em{color:var(--muted)}
+.fig{border:.5px solid var(--line);border-radius:2px;padding:16px;margin:28px 0}
+.fig svg{display:block;width:100%;height:auto}
+.fig .cap{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:12px}
+svg text{font-family:'DM Mono',ui-monospace,monospace;font-size:12px;fill:var(--text)}
+.ol{fill:none;stroke:var(--ol);stroke-width:1}
+.mid{text-anchor:middle}
+.work-item{display:flex;align-items:flex-start;padding:18px 0;border-bottom:.5px solid var(--line);cursor:pointer;gap:14px}
+.work-item:first-of-type{border-top:.5px solid var(--line)}
+.work-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:24px;padding-top:4px}
+.work-main{flex:1;min-width:0}
+.work-title{font-size:16px;color:var(--text);font-weight:400}
+.work-meta{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+.work-body{font-size:14px;line-height:1.8;color:var(--muted);display:none;padding-top:12px;border-top:.5px solid var(--line);margin-top:12px}
+.work-body strong{color:var(--accent);font-weight:400}
+.work-item.open .work-body{display:block}
+.work-arrow{font-family:'DM Mono',monospace;font-size:20px;color:var(--dim);transition:transform .25s,color .2s;line-height:1}
+.work-item:hover .work-arrow,.work-item.open .work-arrow{color:var(--text)}
+.work-item.open .work-arrow{transform:rotate(45deg)}
+.quad{display:grid;grid-template-columns:1fr 1fr;border:.5px solid var(--line);border-radius:2px;margin:28px 0 12px}
+.quad>div{padding:16px;border-right:.5px solid var(--line);border-bottom:.5px solid var(--line)}
+.quad>div:nth-child(2n){border-right:none}.quad>div:nth-last-child(-n+2){border-bottom:none}
+.quad .qt{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.quad p{font-size:13px;line-height:1.7;color:var(--muted)}
+.quad p+p{margin-top:6px}
+@media(max-width:520px){.quad{grid-template-columns:1fr}.quad>div{border-right:none!important;border-bottom:.5px solid var(--line)!important}.quad>div:last-child{border-bottom:none!important}}
+.wide{overflow-x:auto;border:.5px solid var(--line);border-radius:2px;margin:20px 0}
+table{border-collapse:collapse;min-width:640px;width:100%}
+th,td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:.5px solid var(--line);font-size:13px;line-height:1.6;color:var(--muted)}
+th{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--text);font-weight:400}
+tr:last-child td,tr:last-child th{border-bottom:none}
+tbody th{color:var(--green);width:90px}
+.skills-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.skill-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.05em;text-transform:uppercase;padding:7px 12px;border:.5px solid var(--dim);border-radius:2px;color:var(--muted)}
+.skill-tag.bad{text-decoration:line-through;text-decoration-color:var(--dim)}
+.edu-block{padding:18px 0;border-bottom:.5px solid var(--line)}
+.edu-block:first-of-type{border-top:.5px solid var(--line)}
+.edu-name{font-size:15px}
+.edu-sub{font-size:13px;line-height:1.7;color:var(--muted);margin-top:6px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:0;border:.5px solid var(--line);border-radius:2px;margin-bottom:24px}
+.duo>div{padding:18px}.duo>div:first-child{border-right:.5px solid var(--line)}
+.duo .edu-name{margin-bottom:8px}
+@media(max-width:520px){.duo{grid-template-columns:1fr}.duo>div:first-child{border-right:none;border-bottom:.5px solid var(--line)}}
+.footer{margin-top:72px;padding-top:24px;border-top:.5px solid var(--line)}
+.footer-name{font-family:'DM Serif Display',serif;font-size:22px;font-style:italic;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <button class="nav-link nav-name" id="tg" onclick="toggleTheme()" aria-label="Switch between dark and light mode">◐ Light</button>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="showSection('empathy',this)">Empathy</button>
+    <button class="nav-link" onclick="showSection('build',this)">Build</button>
+    <button class="nav-link" onclick="showSection('journey',this)">Journey</button>
+    <button class="nav-link" onclick="showSection('compare',this)">Compare</button>
+    <button class="nav-link" onclick="showSection('practice',this)">Practice</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">Empathy Mapping &amp; User Journeys</div>
+  <h1 class="hero-name">In Their<br><em>Shoes</em></h1>
+  <p class="hero-bio">Imagine you're ordering lunch on an app. Your class starts in 10 minutes, and the Pay button doesn't work. You feel stressed. The person who built the app never felt that, because they never used it in your situation.</p>
+  <p class="hero-bio">Designers use two simple tools to understand people like you:</p>
+  <p class="hero-bio">An <strong>empathy map</strong> is one page about one person. It shows what they say, think, do and feel.</p>
+  <p class="hero-bio">A <strong>user journey map</strong> follows that person step by step while they finish one task, like ordering lunch.</p>
+  <p class="hero-bio">In this guide, our example is <em>Maya</em>, a student with 12 minutes between classes, ordering lunch on an app called <em>Campus Eats</em>.</p>
+  <div class="hero-status"><span class="dot"></span>Tool one: empathy map. Tool two: journey map</div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">4</div><div class="stat-lbl">Quadrants</div></div>
+  <div class="stat"><div class="stat-num">5</div><div class="stat-lbl">Journey stages</div></div>
+  <div class="stat"><div class="stat-num">1</div><div class="stat-lbl">Person at a time</div></div>
+</div>
+
+<!-- EMPATHY -->
+<div id="empathy" class="section active">
+  <div class="sec-head"><span class="sec-tag">( What is it )</span><div class="sec-line"></div></div>
+  <p class="pull">Empathy mapping is a way to characterise your target users <em>in order to make effective design decisions.</em></p>
+  <p class="t">An empathy map is a square split into four parts around one person. <strong>The gaps between the parts are where the insights hide.</strong></p>
+  <p class="t">If your research notes are a pile of bricks, the empathy map is the <strong>first wall</strong>. It sorts what you learned about a person into four questions, so the team sees a human being instead of a spreadsheet.</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 240" role="img" aria-label="An empathy map: Says and Does on the visible left side, Thinks and Feels on the hidden right side, with the user in the center.">
+      <text class="mid" x="245" y="16" style="fill:var(--green)">VISIBLE</text><text class="mid" x="395" y="16" style="fill:var(--muted)">HIDDEN</text>
+      <rect class="ol" x="170" y="28" width="300" height="190"/>
+      <line x1="320" y1="28" x2="320" y2="218" stroke="var(--ol)"/><line x1="170" y1="123" x2="470" y2="123" stroke="var(--ol)"/>
+      <text class="mid" x="245" y="70">SAYS</text><text class="mid" x="245" y="88" style="fill:var(--muted);font-size:10px">quotes</text>
+      <text class="mid" x="395" y="70">THINKS</text><text class="mid" x="395" y="88" style="fill:var(--muted);font-size:10px">inferred</text>
+      <text class="mid" x="245" y="170">DOES</text><text class="mid" x="245" y="188" style="fill:var(--muted);font-size:10px">observed</text>
+      <text class="mid" x="395" y="170">FEELS</text><text class="mid" x="395" y="188" style="fill:var(--muted);font-size:10px">emotions</text>
+      <circle cx="320" cy="123" r="26" fill="var(--bg)" stroke="var(--green)"/><text class="mid" x="320" y="127" style="fill:var(--green);font-size:11px">USER</text>
+    </svg>
+    <div class="cap">Left side you can see and hear. Right side you must infer</div>
+  </div>
+
+  <div class="sec-head"><span class="sec-tag">( Four quadrants )</span><div class="sec-line"></div></div>
+  <div class="work-item open" onclick="toggleWork(this)" tabindex="0"><div class="work-num">01</div><div class="work-main"><div class="work-title">Says</div><div class="work-body">Direct quotes from interviews. Use the person's own words, including complaints and praise.</div></div></div>
+  <div class="work-item open" onclick="toggleWork(this)" tabindex="0"><div class="work-num">02</div><div class="work-main"><div class="work-title">Thinks</div><div class="work-body">What goes on in their head: worries they keep quiet, beliefs and expectations. You infer this from what they say and do.</div></div></div>
+  <div class="work-item open" onclick="toggleWork(this)" tabindex="0"><div class="work-num">03</div><div class="work-main"><div class="work-title">Does</div><div class="work-body">Behaviour you can observe: habits, actions and workarounds. Often this differs from what people say.</div></div></div>
+  <div class="work-item open" onclick="toggleWork(this)" tabindex="0"><div class="work-num">04</div><div class="work-main"><div class="work-title">Feels</div><div class="work-body">The emotions behind it all: stress, joy, confusion. Note what triggers each one.</div></div></div>
+
+  <div class="sec-head"><span class="sec-tag">( Optional extras )</span><div class="sec-line"></div></div>
+  <p class="t">Many teams add two boxes below the map. <strong>Pains</strong> are fears, frustrations and obstacles. <strong>Gains</strong> are what the person hopes to achieve and how they'd measure success.</p>
+  <div class="skills-list"><span class="skill-tag">Fear of failing</span><span class="skill-tag">Time wasted</span><span class="skill-tag">Confusing steps</span><span class="skill-tag" style="color:var(--green);border-color:var(--green)">Quick wins</span><span class="skill-tag" style="color:var(--green);border-color:var(--green)">Feeling in control</span><span class="skill-tag" style="color:var(--green);border-color:var(--green)">Saving money</span></div>
+</div>
+
+<!-- BUILD -->
+<div id="build" class="section">
+  <div class="sec-head"><span class="sec-tag">( Five steps )</span><div class="sec-line"></div></div>
+  <div class="work-item open" onclick="toggleWork(this)" tabindex="0"><div class="work-num">01</div><div class="work-main"><div class="work-title">Pick one person</div><div class="work-body">Use a real user, or a persona based on research. Never map "everyone".</div></div></div>
+  <div class="work-item open" onclick="toggleWork(this)" tabindex="0"><div class="work-num">02</div><div class="work-main"><div class="work-title">Gather evidence</div><div class="work-body">Interview, observe, read survey answers. Write each finding on its own sticky note.</div></div></div>
+  <div class="work-item open" onclick="toggleWork(this)" tabindex="0"><div class="work-num">03</div><div class="work-main"><div class="work-title">Sort the notes</div><div class="work-body">Place each note in Says, Thinks, Does or Feels. Keep quotes in the person's own words.</div></div></div>
+  <div class="work-item open" onclick="toggleWork(this)" tabindex="0"><div class="work-num">04</div><div class="work-main"><div class="work-title">Hunt for contradictions</div><div class="work-body">Where Says and Does disagree, or Thinks and Feels clash, you've found your best clue.</div></div></div>
+  <div class="work-item open" onclick="toggleWork(this)" tabindex="0"><div class="work-num">05</div><div class="work-main"><div class="work-title">Write one insight</div><div class="work-body">Finish with "Maya needs ___ because ___". That sentence drives the design.</div></div></div>
+
+  <div class="sec-head"><span class="sec-tag">( Example: Maya at lunchtime )</span><div class="sec-line"></div></div>
+  <div class="quad">
+    <div><div class="qt">Says</div><p>"I just want to grab food and go."</p><p>"I never know if the order went through."</p></div>
+    <div><div class="qt">Thinks</div><p>"If I'm late, I'll lose my seat."</p><p>"Cash is easier than this app."</p></div>
+    <div><div class="qt">Does</div><p>Orders from the same two stalls.</p><p>Screenshots her receipt as proof.</p></div>
+    <div><div class="qt">Feels</div><p>Rushed and anxious while ordering.</p><p>Relieved once the food is ready.</p></div>
+  </div>
+  <div class="fig" style="margin-top:0"><div class="cap" style="margin-top:0">Empathy map for Maya, first-year student</div></div>
+  <p class="pull">Maya needs clear proof that her order worked, <em>because she screenshots receipts out of fear that it didn't.</em></p>
+  <p class="t">The contradiction: she says she wants speed, but she spends time collecting evidence. A <strong>confirmation screen with a pickup time</strong> would remove that fear.</p>
+</div>
+
+<!-- JOURNEY -->
+<div id="journey" class="section">
+  <div class="sec-head"><span class="sec-tag">( What is it )</span><div class="sec-line"></div></div>
+  <p class="pull">An empathy map is a snapshot. A journey map is the film. <em>The wavy line shows where the experience soars and where it sinks.</em></p>
+  <p class="t">A <strong>user journey map</strong> lays the stages of one task from left to right. For each stage it records what the person does, thinks and feels. The dips in the emotion line are your priorities, and the last row turns the map into a plan.</p>
+
+  <div class="sec-head"><span class="sec-tag">( The framework )</span><div class="sec-line"></div></div>
+  <p class="pull">Every journey map is a grid. <em>One axis is time, the other is what you want to learn.</em></p>
+  <p class="t"><strong>Across the top</strong> are the steps the person takes, in order, from start to finish. <strong>Down the side</strong> are the themes you analyse at every step: what they do, what questions they have, what makes them happy, what hurts, and what you could improve. Each box in the grid gets a sticky note.</p>
+  <div class="fig">
+    <svg viewBox="0 0 640 338" role="img" aria-label="A journey map grid. Across the top, steps through time: Record, Download to computer, Import to editing software, Edit the video, Export, Upload, Share. Down the side, themes for analysis: Actions, Questions, Happy moments, Pain points, Opportunities.">
+      <rect class="ol" x="113" y="6" width="68" height="44"/>
+      <text class="mid" x="147" y="32" style="font-size:9.5px">Record</text>
+      <rect class="ol" x="187" y="6" width="68" height="44"/>
+      <text class="mid" x="221" y="26" style="font-size:9.5px">Download to</text>
+      <text class="mid" x="221" y="38" style="font-size:9.5px">computer</text>
+      <rect class="ol" x="261" y="6" width="68" height="44"/>
+      <text class="mid" x="295" y="22" style="font-size:9.5px">Import to</text>
+      <text class="mid" x="295" y="32" style="font-size:9.5px">editing</text>
+      <text class="mid" x="295" y="42" style="font-size:9.5px">software</text>
+      <rect class="ol" x="335" y="6" width="68" height="44"/>
+      <text class="mid" x="369" y="26" style="font-size:9.5px">Edit the</text>
+      <text class="mid" x="369" y="38" style="font-size:9.5px">video</text>
+      <rect class="ol" x="409" y="6" width="68" height="44"/>
+      <text class="mid" x="443" y="32" style="font-size:9.5px">Export</text>
+      <rect class="ol" x="483" y="6" width="68" height="44"/>
+      <text class="mid" x="517" y="32" style="font-size:9.5px">Upload</text>
+      <rect class="ol" x="557" y="6" width="68" height="44"/>
+      <text class="mid" x="591" y="32" style="font-size:9.5px">Share</text>
+      <text x="112" y="68" style="fill:var(--green);font-size:10px">HORIZONTAL AXIS = STEPS THROUGH TIME</text>
+      <line x1="110" y1="76" x2="624" y2="76" stroke="var(--green)" stroke-width="1.5"/><polygon points="622,70 634,76 622,82" fill="var(--green)"/>
+      <line x1="110" y1="96" x2="110" y2="326" stroke="var(--line)"/>
+      <line x1="184" y1="96" x2="184" y2="326" stroke="var(--line)"/>
+      <line x1="258" y1="96" x2="258" y2="326" stroke="var(--line)"/>
+      <line x1="332" y1="96" x2="332" y2="326" stroke="var(--line)"/>
+      <line x1="406" y1="96" x2="406" y2="326" stroke="var(--line)"/>
+      <line x1="480" y1="96" x2="480" y2="326" stroke="var(--line)"/>
+      <line x1="554" y1="96" x2="554" y2="326" stroke="var(--line)"/>
+      <line x1="628" y1="96" x2="628" y2="326" stroke="var(--line)"/>
+      <line x1="110" y1="96" x2="628" y2="96" stroke="var(--line)"/>
+      <line x1="110" y1="142" x2="628" y2="142" stroke="var(--line)"/>
+      <line x1="110" y1="188" x2="628" y2="188" stroke="var(--line)"/>
+      <line x1="110" y1="234" x2="628" y2="234" stroke="var(--line)"/>
+      <line x1="110" y1="280" x2="628" y2="280" stroke="var(--line)"/>
+      <line x1="110" y1="326" x2="628" y2="326" stroke="var(--line)"/>
+      <text class="mid" x="50" y="90" style="fill:var(--green);font-size:9px">THEMES</text>
+      <line x1="102" y1="96" x2="102" y2="320" stroke="var(--green)" stroke-width="1.5"/><polygon points="96,318 102,332 108,318" fill="var(--green)"/>
+      <rect class="ol" x="4" y="100" width="92" height="38"/>
+      <text class="mid" x="50" y="123" style="font-size:9.5px">Actions</text>
+      <rect class="ol" x="4" y="146" width="92" height="38"/>
+      <text class="mid" x="50" y="169" style="font-size:9.5px">Questions</text>
+      <rect class="ol" x="4" y="192" width="92" height="38"/>
+      <text class="mid" x="50" y="209" style="font-size:9.5px">Happy</text>
+      <text class="mid" x="50" y="221" style="font-size:9.5px">moments</text>
+      <rect class="ol" x="4" y="238" width="92" height="38"/>
+      <text class="mid" x="50" y="255" style="font-size:9.5px">Pain</text>
+      <text class="mid" x="50" y="267" style="font-size:9.5px">points</text>
+      <rect class="ol" x="4" y="284" width="92" height="38"/>
+      <text class="mid" x="50" y="307" style="font-size:9.5px">Opportunities</text>
+    </svg>
+    <div class="cap">A simple user journey map framework: making and sharing a video</div>
+  </div>
+  <div class="work-item open" onclick="toggleWork(this)" tabindex="0"><div class="work-num">01</div><div class="work-main"><div class="work-title">Horizontal axis: steps through time</div><div class="work-body">List every step in order. In this example: record, download, import, edit, export, upload and share.</div></div></div>
+  <div class="work-item open" onclick="toggleWork(this)" tabindex="0"><div class="work-num">02</div><div class="work-main"><div class="work-title">Vertical axis: themes for analysis</div><div class="work-body">Ask the same five questions at every step: actions, questions, happy moments, pain points and opportunities.</div></div></div>
+
+  <div class="sec-head"><span class="sec-tag">( Example: Maya orders lunch )</span><div class="sec-line"></div></div>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 250" role="img" aria-label="Maya's emotion curve: curious while discovering, excited while browsing, annoyed at payment, anxious while waiting, relieved when eating.">
+      <text x="14" y="52" style="fill:var(--green);font-size:10px">HIGH</text><text x="14" y="232" style="fill:var(--muted);font-size:10px">LOW</text>
+      <line x1="14" y1="125" x2="626" y2="125" stroke="var(--line)" stroke-dasharray="3 5"/>
+      <g class="mid" style="fill:var(--muted)"><text class="mid" x="64" y="24">DISCOVER</text><text class="mid" x="192" y="24">BROWSE</text><text class="mid" x="320" y="24">PAY</text><text class="mid" x="448" y="24">WAIT</text><text class="mid" x="576" y="24">EAT</text></g>
+      <path d="M64 95 C128 95 128 65 192 65 S256 160 320 160 S384 185 448 185 S512 55 576 55" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+      <circle cx="64" cy="95" r="6" fill="var(--green)"/><circle cx="192" cy="65" r="6" fill="var(--green)"/><circle cx="320" cy="160" r="6" fill="var(--bg)" stroke="var(--accent)"/><circle cx="448" cy="185" r="6" fill="var(--bg)" stroke="var(--accent)"/><circle cx="576" cy="55" r="6" fill="var(--green)"/>
+      <text class="mid" x="64" y="120" style="font-size:10px">curious</text><text class="mid" x="192" y="90" style="font-size:10px">excited</text><text class="mid" x="320" y="185" style="font-size:10px">annoyed</text><text class="mid" x="448" y="210" style="font-size:10px">anxious</text><text class="mid" x="576" y="80" style="font-size:10px">relieved</text>
+    </svg>
+    <div class="cap">Maya orders lunch. Pay and Wait are the low points</div>
+  </div>
+
+  <div class="sec-head"><span class="sec-tag">( Stage by stage )</span><div class="sec-line"></div></div>
+  <div class="work-item" onclick="toggleWork(this)" tabindex="0"><div class="work-num">01</div><div class="work-main"><div class="work-title">Discover</div><div class="work-meta">Mood: curious</div><div class="work-body"><strong>Does:</strong> Sees a poster on campus and opens the app.<br><strong>Thinks:</strong> "Is this cheaper than the canteen?"<br><strong>Pain:</strong> None yet.<br><strong>Idea:</strong> Show a first-order discount.</div></div><div class="work-arrow">+</div></div>
+  <div class="work-item" onclick="toggleWork(this)" tabindex="0"><div class="work-num">02</div><div class="work-main"><div class="work-title">Browse</div><div class="work-meta">Mood: excited</div><div class="work-body"><strong>Does:</strong> Scrolls the menu and filters by price.<br><strong>Thinks:</strong> "Good, I can see prices at once."<br><strong>Pain:</strong> Some items have no photos.<br><strong>Idea:</strong> Add a photo for every item.</div></div><div class="work-arrow">+</div></div>
+  <div class="work-item open" onclick="toggleWork(this)" tabindex="0"><div class="work-num">03</div><div class="work-main"><div class="work-title">Pay</div><div class="work-meta">Mood: annoyed</div><div class="work-body"><strong>Does:</strong> Taps Pay, then re-enters card details.<br><strong>Thinks:</strong> "Did it charge me or not?"<br><strong>Pain:</strong> Payment fails with no message.<br><strong>Idea:</strong> Explain errors and save the cart.</div></div><div class="work-arrow">+</div></div>
+  <div class="work-item open" onclick="toggleWork(this)" tabindex="0"><div class="work-num">04</div><div class="work-main"><div class="work-title">Wait</div><div class="work-meta">Mood: anxious</div><div class="work-body"><strong>Does:</strong> Refreshes the screen, checks the stall.<br><strong>Thinks:</strong> "Is my order even in the queue?"<br><strong>Pain:</strong> No pickup time shown.<br><strong>Idea:</strong> Show a live pickup countdown.</div></div><div class="work-arrow">+</div></div>
+  <div class="work-item" onclick="toggleWork(this)" tabindex="0"><div class="work-num">05</div><div class="work-main"><div class="work-title">Eat</div><div class="work-meta">Mood: relieved</div><div class="work-body"><strong>Does:</strong> Collects food and shows her receipt.<br><strong>Thinks:</strong> "That took less time than I feared."<br><strong>Pain:</strong> The pickup counter is hard to find.<br><strong>Idea:</strong> Send a "ready, counter B" alert.</div></div><div class="work-arrow">+</div></div>
+</div>
+
+<!-- COMPARE -->
+<div id="compare" class="section">
+  <div class="sec-head"><span class="sec-tag">( Which tool when )</span><div class="sec-line"></div></div>
+  <div class="duo">
+    <div><div class="edu-name">Empathy map</div><div class="edu-sub">Use it to understand <strong style="color:var(--accent);font-weight:400">who</strong> your user is. Best at the start, after your first interviews. It gives you one clear picture of a mindset.</div></div>
+    <div><div class="edu-name">Journey map</div><div class="edu-sub">Use it to see <strong style="color:var(--accent);font-weight:400">where</strong> things go wrong over time. Best when you have a product or process to improve. It shows what to fix first.</div></div>
+  </div>
+  <p class="pull">The empathy map explains <em>why</em> Maya feels anxious. The journey map shows <em>when</em> that anxiety peaks.</p>
+
+  <div class="sec-head"><span class="sec-tag">( Side by side )</span><div class="sec-line"></div></div>
+  <div class="wide"><table>
+    <thead><tr><th></th><th>Empathy map</th><th>Journey map</th></tr></thead>
+    <tbody>
+    <tr><th>Shows</th><td>One mindset, frozen in time</td><td>A task unfolding over time</td></tr>
+    <tr><th>Layout</th><td>Four quadrants</td><td>Stages left to right, emotion line</td></tr>
+    <tr><th>Answers</th><td>What does this person need?</td><td>Where do they struggle, and when?</td></tr>
+    <tr><th>Output</th><td>One insight sentence</td><td>A list of fixes by stage</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="sec-head"><span class="sec-tag">( Common mistakes )</span><div class="sec-line"></div></div>
+  <div class="skills-list"><span class="skill-tag bad">Mapping "all students"</span><span class="skill-tag bad">Guesses, not evidence</span><span class="skill-tag bad">Only positives</span><span class="skill-tag bad">Making it once</span><span class="skill-tag bad">No insight sentence</span></div>
+  <p class="t">A map is a conversation starter. Keep updating it every time you learn something new from a real person.</p>
+</div>
+
+<!-- PRACTICE -->
+<div id="practice" class="section">
+  <div class="sec-head"><span class="sec-tag">( Try it yourself )</span><div class="sec-line"></div></div>
+  <div class="edu-block"><div class="edu-name">01 — Interview a classmate</div><div class="edu-sub">Ask a friend how they get lunch on a busy day. Take notes for five minutes, then sort them into Says, Thinks, Does and Feels.</div></div>
+  <div class="edu-block"><div class="edu-name">02 — Map your own morning</div><div class="edu-sub">Draw five stages of getting to class, from waking up to sitting down. Add an emotion curve and circle the lowest point.</div></div>
+  <div class="edu-block"><div class="edu-name">03 — Find the contradiction</div><div class="edu-sub">Look at your empathy map for a gap between what someone says and what they do. Write one idea to close it.</div></div>
+
+  <div class="sec-head"><span class="sec-tag">( The big idea )</span><div class="sec-line"></div></div>
+  <p class="pull">Design starts with listening. <em>Replace "I think users want" with "I saw that Maya needs".</em></p>
+  <p class="t">The next time an app frustrates you, notice which stage of the journey broke. You've just spotted a gap that someone didn't map.</p>
+  <div class="footer"><div class="footer-name">Now go and meet a real person.</div></div>
+</div>
+
+</div>
+<script>
+function showSection(id,btn){
+  document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active')});
+  document.querySelectorAll('.nav-link').forEach(function(b){b.classList.remove('active')});
+  document.getElementById(id).classList.add('active');btn.classList.add('active');window.scrollTo(0,0);
+}
+function setTheme(t){document.documentElement.setAttribute('data-mode',t);var b=document.getElementById('tg');if(b)b.textContent=t==='dark'?'◐ Light':'◑ Dark';try{localStorage.setItem('mode',t)}catch(e){}}
+function toggleTheme(){setTheme(document.documentElement.getAttribute('data-mode')==='light'?'dark':'light')}
+(function(){var t='dark';try{t=localStorage.getItem('mode')||'dark'}catch(e){}setTheme(t)})();
+function toggleWork(el){el.classList.toggle('open')}
+document.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('work-item')){e.preventDefault();toggleWork(e.target)}});
+</script>
+</body>
+</html>
